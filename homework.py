@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Dict, Type
 
 
@@ -13,22 +13,16 @@ class InfoMessage:
     calories: float  # потраченные за время тренировки ккал
 
     INFO_MESSAGE: str = (
-        'Тип тренировки: {}; '
-        'Длительность: {:.3f} ч.; '
-        'Дистанция: {:.3f} км; '
-        'Ср. скорость: {:.3f} км/ч; '
-        'Потрачено ккал: {:.3f}.'
+        'Тип тренировки: {training_type}; '
+        'Длительность: {duration:.3f} ч.; '
+        'Дистанция: {distance:.3f} км; '
+        'Ср. скорость: {speed:.3f} км/ч; '
+        'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
         """Вернуть информационное сообщение с параметрами тренировки."""
-        return self.INFO_MESSAGE.format(
-            self.training_type,
-            self.duration,
-            self.distance,
-            self.speed,
-            self.calories,
-        )
+        return self.INFO_MESSAGE.format(**asdict(self))
 
 
 class Training:
@@ -154,13 +148,9 @@ def read_package(workout_type: str, data: list) -> Training:
         'WLK': SportsWalking,
         'SWM': Swimming,
     }
-    if workout_type in type_trainings:
-        return type_trainings[workout_type](*data)
-    else:
-        try:
-            raise
-        except Exception:
-            print(f'Тип тренеровки "{workout_type}" не релевантен')
+    if workout_type not in type_trainings:
+        raise ValueError(f'Тип тренировки "{workout_type}" не релевантен')
+    return type_trainings[workout_type](*data)
 
 
 def main(training: Training) -> None:
