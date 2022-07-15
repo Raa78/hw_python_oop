@@ -160,16 +160,3 @@ _или_
 - Установите зависимости из файла requirements.txt
 ```
 pip install -r requirements.txt
-``` 
-- Выполните миграции
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-- Перейдите в папку yatube_api и выполните команду
-```
-python manage.py runserver
-```
-
-### Автор проекта
-Андрей Рубцов
