@@ -119,11 +119,11 @@ def main(training)
 # Инструкция для запуска проекта:
 - Клонируйте репозиторий
 ```
-git clone git@github.com:Raa78/hw05_final.git
+git clone git@github.com:Raa78/hw_python_oop.git
 ```
 - Перейдите в папку с проектом
 ```
-cd hw05_final
+cd hw_python_oop
 ```
 - В папке с проектом установите виртуальное окружение
 Windows
